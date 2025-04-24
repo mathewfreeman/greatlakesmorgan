@@ -8,191 +8,100 @@
     <meta name="description" content="Coming Soon: The website for the Great Lakes Morgan Horse Association, serving Morgan horse enthusiasts in Michigan, Ohio, and the Great Lakes region.">
 
     <style>
+        /* --- STYLES --- */
         /* Basic Reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         /* Color Variables */
         :root {
-            --primary-blue: #0077CC;
-            --secondary-teal: #00A0A0;
-            --accent-light-blue: #E0F2F7;
-            --dark-text: #333333;
-            --white-bg: #FFFFFF;
-            --container-bg: #f9f9f9;
-            --light-grey: #eeeeee;
-            --medium-grey: #cccccc;
-            --dark-grey: #555555;
+            --primary-blue: #0077CC; --secondary-teal: #00A0A0; --accent-light-blue: #E0F2F7;
+            --dark-text: #333333; --white-bg: #FFFFFF; --container-bg: #f9f9f9;
+            --light-grey: #eeeeee; --medium-grey: #cccccc; --dark-grey: #555555;
         }
-
         /* Body Styling */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
-            color: var(--dark-text);
-            background-color: var(--white-bg);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            line-height: 1.7; color: var(--dark-text); background-color: var(--white-bg);
+            display: flex; flex-direction: column; min-height: 100vh;
         }
-
         /* Main Content Wrapper */
         .main-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
+            flex-grow: 1; display: flex; justify-content: center; align-items: center;
+            text-align: center; padding: 40px 20px;
         }
-
-        /* Content Container - Enhanced Design */
+        /* Content Container */
         .container {
-            max-width: 700px;
-            width: 100%;
-            padding: 50px 40px;
-            background-color: var(--container-bg);
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(60, 60, 80, 0.08);
+            max-width: 700px; width: 100%; padding: 50px 40px; background-color: var(--container-bg);
+            border-radius: 12px; box-shadow: 0 15px 35px rgba(60, 60, 80, 0.08);
             border: 1px solid var(--light-grey);
         }
-
         /* Headings and Text */
         h1 {
-            font-size: 2.6em;
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
+            font-size: 2.6em; margin-bottom: 15px; color: var(--primary-blue);
+            font-weight: 700; letter-spacing: -0.5px; line-height: 1.2;
         }
-
         h2 {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            color: var(--secondary-teal);
-            font-weight: 500;
+            font-size: 1.3em; margin-bottom: 30px; color: var(--secondary-teal); font-weight: 500;
         }
-
         p {
-            font-size: 1.05em;
-            margin-bottom: 35px;
-            color: var(--dark-grey);
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.05em; margin-bottom: 35px; color: var(--dark-grey);
+            max-width: 550px; margin-left: auto; margin-right: auto;
         }
-
         /* Email Signup Form */
         .signup-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 25px;
-            margin-bottom: 30px;
+            display: flex; justify-content: center; align-items: center;
+            flex-wrap: wrap; gap: 12px; margin-top: 25px; margin-bottom: 30px;
         }
-
         .signup-form input[type="email"] {
-            padding: 14px 18px;
-            border: 1px solid var(--medium-grey);
-            border-radius: 8px;
-            font-size: 1em;
-            background-color: var(--white-bg);
-            color: var(--dark-text);
-            flex-grow: 1;
-            min-width: 220px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 14px 18px; border: 1px solid var(--medium-grey); border-radius: 8px;
+            font-size: 1em; background-color: var(--white-bg); color: var(--dark-text);
+            flex-grow: 1; min-width: 220px; transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .signup-form input[type="email"]::placeholder {
-            color: #999999;
+        .signup-form input[type="email"]::placeholder { color: #999999; }
+        .signup-form input[type="email"]:focus {
+            outline: none; border-color: var(--secondary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 160, 160, 0.15);
         }
-
-         .signup-form input[type="email"]:focus {
-              outline: none;
-              border-color: var(--secondary-teal);
-              box-shadow: 0 0 0 3px rgba(0, 160, 160, 0.15);
-         }
-
         .signup-form button {
-            padding: 14px 30px;
-            background-color: var(--secondary-teal);
-            color: var(--white-bg);
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 14px 30px; background-color: var(--secondary-teal); color: var(--white-bg);
+            border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
         }
+        .signup-form button:hover { background-color: #008080; transform: translateY(-2px); }
+        .signup-form button:active { transform: translateY(0px); }
+        .signup-form button:disabled { background-color: var(--medium-grey); cursor: not-allowed; opacity: 0.7;}
 
-        .signup-form button:hover {
-            background-color: #008080;
-            transform: translateY(-2px);
+        /* Feedback message style */
+        .form-feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 0.95em;
         }
-         .signup-form button:active {
-             transform: translateY(0px);
-         }
+        .success { color: var(--secondary-teal); }
+        .error { color: #cc0000; }
 
         /* Contact Info */
-        .contact-info {
-            font-size: 0.9em;
-            color: var(--dark-grey);
-            margin-top: 40px;
-        }
-
-        .contact-info a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .contact-info a:hover {
-            text-decoration: underline;
-            color: #005599;
-        }
-        .current-date {
-            font-size: 0.8em;
-            color: var(--medium-grey);
-            margin-top: 8px;
-            display: block;
-        }
+        .contact-info { font-size: 0.9em; color: var(--dark-grey); margin-top: 40px; }
+        .contact-info a { color: var(--primary-blue); text-decoration: none; font-weight: 600; }
+        .contact-info a:hover { text-decoration: underline; color: #005599; }
 
         /* Footer */
         footer {
-            background-color: var(--white-bg);
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-            font-size: 0.85em;
-            color: #888888;
-            border-top: 1px solid var(--light-grey);
+            background-color: var(--white-bg); text-align: center; padding: 20px;
+            margin-top: auto; font-size: 0.85em; color: #888888; border-top: 1px solid var(--light-grey);
         }
-
-         /* Responsive Adjustments */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             body { padding-top: 20px;}
-            .main-content { padding: 30px 15px; }
-            .container { padding: 40px 30px; }
-            h1 { font-size: 2.2em; }
-            h2 { font-size: 1.2em; }
-            p { font-size: 1em; }
+            .main-content { padding: 30px 15px; } .container { padding: 40px 30px; }
+            h1 { font-size: 2.2em; } h2 { font-size: 1.2em; } p { font-size: 1em; }
             .signup-form { flex-direction: column; }
-            .signup-form input[type="email"],
-            .signup-form button { width: 100%; max-width: 350px;}
+            .signup-form input[type="email"], .signup-form button { width: 100%; max-width: 350px;}
         }
-         @media (max-width: 480px) {
-              h1 { font-size: 1.9em; }
-              h2 { font-size: 1.05em; }
-              .container { padding: 30px 20px; }
-              .main-content { padding: 20px 10px; }
-         }
-
+        @media (max-width: 480px) {
+            h1 { font-size: 1.9em; } h2 { font-size: 1.05em; }
+            .container { padding: 30px 20px; } .main-content { padding: 20px 10px; }
+        }
+        /* --- END STYLES --- */
     </style>
 </head>
 <body>
@@ -201,17 +110,21 @@
         <div class="container">
             <h1>Great Lakes Morgan<br>Horse Association</h1>
             <h2>Celebrating America's First Breed in the Great Lakes Region</h2>
-            <p>Our new website is currently under construction and launching soon! We're building a resource for Morgan horse enthusiasts in Michigan, Ohio, and beyond - featuring breed information, a regional directory, event listings, and more.</p>
+            <p>Our new website is launching soon! We're building a resource for Morgan horse enthusiasts in Michigan, Ohio, and beyond - featuring breed information, a regional directory, event listings, and more.</p>
 
-            <form action="https://script.google.com/macros/s/AKfycbwVPJb_W1XG0oMHtGvL5WFaxp_iSL3GcSLxFnJKu758T_W1RbZuY650qH4JQjv_6tCa/exec" method="POST" class="signup-form"> <input type="email" name="email" placeholder="Enter email for launch updates" required>
-                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="honeypot" tabindex="-1" value="">
+            <form id="signupForm" class="signup-form">
+                <input type="email" id="emailInput" name="email" placeholder="Enter email for updates" required>
+
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" id="honeypotInput" name="honeypot" tabindex="-1" value="">
                 </div>
-                <button type="submit">Notify Me!</button>
+
+                <button type="submit" id="submitButton">Notify Me!</button>
             </form>
+            <div id="formFeedback" class="form-feedback"></div>
             <div class="contact-info">
                 Get in touch: <a href="mailto:hello@greatlakesmorgan.com">hello@greatlakesmorgan.com</a>
-            </div>
+                </div>
         </div>
     </div>
 
@@ -219,5 +132,64 @@
         &copy; <script>document.write(new Date().getFullYear())</script> Great Lakes Morgan Horse Association
     </footer>
 
-</body>
+    <script>
+        const form = document.getElementById('signupForm');
+        const emailInput = document.getElementById('emailInput');
+        const honeypotInput = document.getElementById('honeypotInput'); // Get honeypot
+        const submitButton = document.getElementById('submitButton');
+        const formFeedback = document.getElementById('formFeedback');
+        // !!! IMPORTANT: Replace this URL with your actual Google Apps Script Web App URL !!!
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwVPJb_W1XG0oMHtGvL5WFaxp_iSL3GcSLxFnJKu758T_W1RbZuY650qH4JQjv_6tCa/exec';
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form redirect
+
+            // Basic client-side validation
+            if (!emailInput.value || emailInput.value.indexOf('@') === -1) {
+                 formFeedback.textContent = 'Please enter a valid email address.';
+                 formFeedback.className = 'form-feedback error'; // Set error class
+                 return; // Stop submission
+            }
+
+            // Disable button and show processing state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            formFeedback.textContent = ''; // Clear previous messages
+            formFeedback.className = 'form-feedback'; // Reset class
+
+            // Create FormData object to send data (includes honeypot)
+            const formData = new FormData(form);
+
+            // Use fetch to send data to Google Apps Script
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    if (response.ok) {
+                        // Assuming response.ok means success (Apps Script didn't throw server error)
+                        formFeedback.textContent = 'Thank you! You've been added to the list.';
+                        formFeedback.className = 'form-feedback success'; // Set success class
+                        submitButton.textContent = 'Submitted!'; // Change button text PERMANENTLY
+                        // Keep button disabled to prevent multiple submissions
+                        emailInput.disabled = true; // Optionally disable input too
+                        form.reset(); // Clear the form fields (optional)
+
+                    } else {
+                        // Handle server-side errors reported by Apps Script (if any)
+                        // Note: The default Apps Script returns HTML on error, so we might not get specific JSON error details here
+                        // unless the script is modified. We'll show a generic error.
+                        return response.text().then(text => { // Try to get text from response
+                           throw new Error('Submission failed. Server responded: ' + (text || response.statusText));
+                        });
+                    }
+                })
+                .catch(error => {
+                    // Handle network errors or errors thrown above
+                    console.error('Error!', error.message);
+                    formFeedback.textContent = 'Oops! Something went wrong. Please try again later.';
+                    formFeedback.className = 'form-feedback error'; // Set error class
+                    submitButton.disabled = false; // Re-enable button on error
+                    submitButton.textContent = 'Notify Me!'; // Reset button text
+                });
+        });
+    </script>
+    </body>
 </html>
