@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coming Soon | Great Lakes Morgan Horse Association</title>
+    <meta name="description" content="Coming Soon: The website for the Great Lakes Morgan Horse Association, serving Morgan horse enthusiasts in Michigan, Ohio, and the Great Lakes region.">
+
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-blue: #0077CC;
+            --secondary-teal: #00A0A0;
+            --accent-light-blue: #E0F2F7;
+            --dark-text: #333333;
+            --white-bg: #FFFFFF;
+            --container-bg: #f9f9f9;
+            --light-grey: #eeeeee;
+            --medium-grey: #cccccc;
+            --dark-grey: #555555;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background-color: var(--white-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Content Wrapper */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* Content Container - Enhanced Design */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 50px 40px;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(60, 60, 80, 0.08);
+            border: 1px solid var(--light-grey);
+        }
+
+        /* Headings and Text */
+        h1 {
+            font-size: 2.6em;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: var(--secondary-teal);
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 1.05em;
+            margin-bottom: 35px;
+            color: var(--dark-grey);
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Email Signup Form */
+        .signup-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        .signup-form input[type="email"] {
+            padding: 14px 18px;
+            border: 1px solid var(--medium-grey);
+            border-radius: 8px;
+            font-size: 1em;
+            background-color: var(--white-bg);
+            color: var(--dark-text);
+            flex-grow: 1;
+            min-width: 220px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .signup-form input[type="email"]::placeholder {
+            color: #999999;
+        }
+
+         .signup-form input[type="email"]:focus {
+              outline: none;
+              border-color: var(--secondary-teal);
+              box-shadow: 0 0 0 3px rgba(0, 160, 160, 0.15);
+         }
+
+        .signup-form button {
+            padding: 14px 30px;
+            background-color: var(--secondary-teal);
+            color: var(--white-bg);
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .signup-form button:hover {
+            background-color: #008080;
+            transform: translateY(-2px);
+        }
+         .signup-form button:active {
+             transform: translateY(0px);
+         }
+
+        /* Contact Info */
+        .contact-info {
+            font-size: 0.9em;
+            color: var(--dark-grey);
+            margin-top: 40px;
+        }
+
+        .contact-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+            color: #005599;
+        }
+        .current-date {
+            font-size: 0.8em;
+            color: var(--medium-grey);
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--white-bg);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            font-size: 0.85em;
+            color: #888888;
+            border-top: 1px solid var(--light-grey);
+        }
+
+         /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body { padding-top: 20px;}
+            .main-content { padding: 30px 15px; }
+            .container { padding: 40px 30px; }
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.2em; }
+            p { font-size: 1em; }
+            .signup-form { flex-direction: column; }
+            .signup-form input[type="email"],
+            .signup-form button { width: 100%; max-width: 350px;}
+        }
+         @media (max-width: 480px) {
+              h1 { font-size: 1.9em; }
+              h2 { font-size: 1.05em; }
+              .container { padding: 30px 20px; }
+              .main-content { padding: 20px 10px; }
+         }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Great Lakes Morgan<br>Horse Association</h1>
+            <h2>Celebrating America's First Breed in the Great Lakes Region</h2>
+            <p>Our new website is currently under construction and launching soon! We're building a resource for Morgan horse enthusiasts in Michigan, Ohio, and beyond - featuring breed information, a regional directory, event listings, and more.</p>
+
+            <form action="https://script.google.com/macros/s/AKfycbwVPJb_W1XG0oMHtGvL5WFaxp_iSL3GcSLxFnJKu758T_W1RbZuY650qH4JQjv_6tCa/exec" method="POST" class="signup-form"> <input type="email" name="email" placeholder="Enter email for launch updates" required>
+                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="honeypot" tabindex="-1" value="">
+                </div>
+                <button type="submit">Notify Me!</button>
+            </form>
+            <div class="contact-info">
+                Get in touch: <a href="mailto:hello@greatlakesmorgan.com">hello@greatlakesmorgan.com</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; <script>document.write(new Date().getFullYear())</script> Great Lakes Morgan Horse Association
+    </footer>
+
+</body>
+</html>
