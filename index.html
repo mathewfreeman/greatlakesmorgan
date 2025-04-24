@@ -8,7 +8,7 @@
     <meta name="description" content="Coming Soon: The website for the Great Lakes Morgan Horse Association, serving Morgan horse enthusiasts in Michigan, Ohio, and the Great Lakes region.">
 
     <style>
-        /* --- STYLES --- */
+        /* --- STYLES (Mostly Unchanged) --- */
         /* Basic Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         /* Color Variables */
@@ -16,6 +16,7 @@
             --primary-blue: #0077CC; --secondary-teal: #00A0A0; --accent-light-blue: #E0F2F7;
             --dark-text: #333333; --white-bg: #FFFFFF; --container-bg: #f9f9f9;
             --light-grey: #eeeeee; --medium-grey: #cccccc; --dark-grey: #555555;
+            --success-text: #008080; /* Teal for success text */
         }
         /* Body Styling */
         body {
@@ -46,10 +47,24 @@
             font-size: 1.05em; margin-bottom: 35px; color: var(--dark-grey);
             max-width: 550px; margin-left: auto; margin-right: auto;
         }
-        /* Email Signup Form */
+        /* Email Signup Form Wrapper */
+        .signup-form-wrapper {
+             /* This wrapper helps in replacing the input field */
+             min-height: 50px; /* Prevent layout shift when input replaced */
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             margin-top: 25px;
+             margin-bottom: 30px;
+        }
+        /* Form itself doesn't need much style now */
         .signup-form {
-            display: flex; justify-content: center; align-items: center;
-            flex-wrap: wrap; gap: 12px; margin-top: 25px; margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%; /* Take full width of wrapper */
         }
         .signup-form input[type="email"] {
             padding: 14px 18px; border: 1px solid var(--medium-grey); border-radius: 8px;
@@ -70,14 +85,15 @@
         .signup-form button:active { transform: translateY(0px); }
         .signup-form button:disabled { background-color: var(--medium-grey); cursor: not-allowed; opacity: 0.7;}
 
-        /* Feedback message style */
-        .form-feedback {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 0.95em;
+        /* Style for the thank you message that replaces the input */
+        .thank-you-message {
+            font-size: 1.05em;
+            font-weight: 500;
+            color: var(--success-text);
+            padding: 14px 0; /* Match approximate vertical space of input */
+            flex-grow: 1; /* Allow it to take space */
+            text-align: center;
         }
-        .success { color: var(--secondary-teal); }
-        .error { color: #cc0000; }
 
         /* Contact Info */
         .contact-info { font-size: 0.9em; color: var(--dark-grey); margin-top: 40px; }
@@ -94,8 +110,10 @@
             body { padding-top: 20px;}
             .main-content { padding: 30px 15px; } .container { padding: 40px 30px; }
             h1 { font-size: 2.2em; } h2 { font-size: 1.2em; } p { font-size: 1em; }
+            .signup-form-wrapper { flex-direction: column; min-height: 100px; } /* Adjust height for stacked elements */
             .signup-form { flex-direction: column; }
             .signup-form input[type="email"], .signup-form button { width: 100%; max-width: 350px;}
+            .thank-you-message { width: 100%; max-width: 350px; padding: 10px 0; }
         }
         @media (max-width: 480px) {
             h1 { font-size: 1.9em; } h2 { font-size: 1.05em; }
@@ -112,19 +130,20 @@
             <h2>Celebrating America's First Breed in the Great Lakes Region</h2>
             <p>Our new website is launching soon! We're building a resource for Morgan horse enthusiasts in Michigan, Ohio, and beyond - featuring breed information, a regional directory, event listings, and more.</p>
 
-            <form id="signupForm" class="signup-form">
-                <input type="email" id="emailInput" name="email" placeholder="Enter email for updates" required>
+            <div id="formArea" class="signup-form-wrapper">
+                <form id="signupForm" class="signup-form">
+                    <input type="email" id="emailInput" name="email" placeholder="Enter email for updates" required>
 
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" id="honeypotInput" name="honeypot" tabindex="-1" value="">
-                </div>
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" id="honeypotInput" name="honeypot" tabindex="-1" value="">
+                    </div>
 
-                <button type="submit" id="submitButton">Notify Me!</button>
-            </form>
-            <div id="formFeedback" class="form-feedback"></div>
+                    <button type="submit" id="submitButton">Notify Me!</button>
+                </form>
+            </div>
             <div class="contact-info">
                 Get in touch: <a href="mailto:hello@greatlakesmorgan.com">hello@greatlakesmorgan.com</a>
-                </div>
+            </div>
         </div>
     </div>
 
@@ -135,60 +154,69 @@
     <script>
         const form = document.getElementById('signupForm');
         const emailInput = document.getElementById('emailInput');
-        const honeypotInput = document.getElementById('honeypotInput'); // Get honeypot
+        const honeypotInput = document.getElementById('honeypotInput');
         const submitButton = document.getElementById('submitButton');
-        const formFeedback = document.getElementById('formFeedback');
+        const formArea = document.getElementById('formArea'); // Get the wrapper div
         // !!! IMPORTANT: Replace this URL with your actual Google Apps Script Web App URL !!!
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwVPJb_W1XG0oMHtGvL5WFaxp_iSL3GcSLxFnJKu758T_W1RbZuY650qH4JQjv_6tCa/exec';
 
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form redirect
+            event.preventDefault(); // ALWAYS prevent default first
+
+            const emailValue = emailInput.value; // Get email value
 
             // Basic client-side validation
-            if (!emailInput.value || emailInput.value.indexOf('@') === -1) {
-                 formFeedback.textContent = 'Please enter a valid email address.';
-                 formFeedback.className = 'form-feedback error'; // Set error class
+            if (!emailValue || emailValue.indexOf('@') === -1) {
+                 alert('Please enter a valid email address.'); // Simple alert for invalid
                  return; // Stop submission
             }
 
-            // Disable button and show processing state
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-            formFeedback.textContent = ''; // Clear previous messages
-            formFeedback.className = 'form-feedback'; // Reset class
+            // --- OPTIMISTIC UI UPDATE ---
+            // Assume success immediately
 
-            // Create FormData object to send data (includes honeypot)
-            const formData = new FormData(form);
+            // 1. Change button text & disable
+            submitButton.textContent = 'Submitted';
+            submitButton.disabled = true;
+
+            // 2. Replace email input with thank you message
+            const thankYouElement = document.createElement('div');
+            thankYouElement.className = 'thank-you-message'; // Apply styling
+            thankYouElement.textContent = 'Thank you! You\'ve been added to the list.';
+
+            // Replace the entire form within the wrapper div with the thank you message
+            formArea.innerHTML = ''; // Clear the wrapper
+            formArea.appendChild(thankYouElement); // Add the thank you message
+
+            // --- END OPTIMISTIC UI UPDATE ---
+
+
+            // --- BACKGROUND SUBMISSION ---
+            // Still send the data, but ignore the response for UI purposes
+
+            // Create FormData object (needs original form structure temporarily)
+            // We need the emailValue captured above and the honeypot value
+            const formData = new FormData();
+            formData.append('email', emailValue); // Use the captured value
+            formData.append('honeypot', honeypotInput.value); // Get honeypot value
 
             // Use fetch to send data to Google Apps Script
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    if (response.ok) {
-                        // Assuming response.ok means success (Apps Script didn't throw server error)
-                        formFeedback.textContent = 'Thank you! You\'ve been added to the list.';
-                        formFeedback.className = 'form-feedback success'; // Set success class
-                        submitButton.textContent = 'Submitted!'; // Change button text PERMANENTLY
-                        // Keep button disabled to prevent multiple submissions
-                        emailInput.disabled = true; // Optionally disable input too
-                        form.reset(); // Clear the form fields (optional)
-
+                    // We can optionally check the response status here for logging
+                    if (!response.ok) {
+                        console.warn('Background submission may have failed. Status:', response.status);
+                        // Optionally log the response text for debugging if needed
+                        // response.text().then(text => console.warn('Response text:', text));
                     } else {
-                        // Handle server-side errors reported by Apps Script (if any)
-                        // Note: The default Apps Script returns HTML on error, so we might not get specific JSON error details here
-                        // unless the script is modified. We'll show a generic error.
-                        return response.text().then(text => { // Try to get text from response
-                           throw new Error('Submission failed. Server responded: ' + (text || response.statusText));
-                        });
+                        console.log('Background submission likely successful.');
                     }
                 })
                 .catch(error => {
-                    // Handle network errors or errors thrown above
-                    console.error('Error!', error.message);
-                    formFeedback.textContent = 'Oops! Something went wrong. Please try again later.';
-                    formFeedback.className = 'form-feedback error'; // Set error class
-                    submitButton.disabled = false; // Re-enable button on error
-                    submitButton.textContent = 'Notify Me!'; // Reset button text
+                    // Log network errors etc. to console for debugging
+                    console.error('Background submission error!', error.message);
+                    // No UI update needed here per user request
                 });
+            // --- END BACKGROUND SUBMISSION ---
         });
     </script>
     </body>
