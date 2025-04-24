@@ -165,7 +165,7 @@
                 .then(response => {
                     if (response.ok) {
                         // Assuming response.ok means success (Apps Script didn't throw server error)
-                        formFeedback.textContent = 'Thank you! You've been added to the list.';
+                        formFeedback.textContent = 'Thank you! You\'ve been added to the list.';
                         formFeedback.className = 'form-feedback success'; // Set success class
                         submitButton.textContent = 'Submitted!'; // Change button text PERMANENTLY
                         // Keep button disabled to prevent multiple submissions
