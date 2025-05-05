@@ -212,7 +212,7 @@ li { margin-bottom: 0.5rem; }
     background-color: var(--primary-blue); /* Fallback */
 }
 .parallax-bg {
-    background-image: url('S/hero.webp'); /* Ensure this path is correct */
+    background-image: url('/GLMHA/S/hero.webp'); /* Ensure this path is correct */
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
