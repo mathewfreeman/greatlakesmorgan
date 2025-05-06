@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Great Lakes Morgan Horse Association - Modern & Dynamic</title>
 
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23005f73' d='M96 48L82.7 61.3C53.3 83.6 32 114.8 32 152V448c0 17.7 14.3 32 32 32H192c17.7 0 32-14.3 32-32V416c0-17.7-14.3-32-32-32H128V352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96H64V152c0-25.4 14.8-48.2 37.8-59.1L128 80l16-16 16 16 26.2 12.3C238.3 115.8 256 154.5 256 196.6V352H416v32c0 17.7 14.3 32 32 32s32-14.3 32-32V192c0-53-43-96-96-96H368c-17.7 0-32 14.3-32 32s14.3 32 32 32h16c17.7 0 32 14.3 32 32v32H288V196.6c0-54.7-33.7-102.9-83.6-124.1L178.7 61.3 160 48 144 32 128 48 96 48z'/%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM Plex Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -22,7 +24,7 @@
             <div class="logo">
                 <a href="#home">GLMHA</a>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links desktop-links"> 
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#directory">Directory</a></li>
@@ -33,9 +35,18 @@
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
             </button>
+            <ul class="nav-links mobile-links"> 
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#directory">Directory</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#forsale">For Sale</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
+    
     <main>
         <section id="home" class="hero-section parallax-bg">
             <div class="hero-overlay"></div>
@@ -66,7 +77,8 @@
                     <button class="btn btn-filter" data-filter="OH">Ohio</button>
                     </div>
                 <div class="directory-grid" id="directory-grid-container" data-aos="fade-up" data-aos-delay="300">
-                    <p>Loading directory...</p> </div>
+                    <p>Loading directory...</p>
+                </div>
             </div>
         </section>
 
@@ -101,10 +113,10 @@
                     <button class="btn btn-filter" data-filter="OH">Ohio</button>
                     </div>
                 <div class="forsale-grid" id="forsale-grid-container" data-aos="fade-up" data-aos-delay="300">
-                    <p>Loading horses for sale...</p> </div>
+                    <p>Loading horses for sale...</p>
+                </div>
             </div>
         </section>
-
 
         <section id="contact" class="content-section contact-flair">
             <div class="container">
@@ -132,7 +144,8 @@
                                 <input type="email" id="signup-email" name="email" required>
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Subscribe</button>
-                            <p id="signup-status" class="signup-status"></p> </form>
+                            <p id="signup-status" class="signup-status"></p>
+                         </form>
                     </div>
                 </div>
             </div>
@@ -141,7 +154,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="current-year"></span> Great Lakes Morgan Horse Association. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Great Lakes Morgan Horse Association.</p>
+            <p class="footer-design-credit">Designed in Michigan</p>
         </div>
     </footer>
 
@@ -155,11 +169,10 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize AOS library
         AOS.init({
-            duration: 800, // Animation duration
-            once: true, // Whether animation should happen only once - while scrolling down
-            offset: 100, // Offset (in px) from the original trigger point
+            duration: 800,
+            once: true,
+            offset: 100,
         });
     </script>
 

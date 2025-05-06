@@ -1,4 +1,4 @@
-// script.js - Final Touches v6 - Button Status Update
+// script.js - Final Touches v8 - Revert Mobile Menu Structure
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -85,8 +85,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- DOM Element References ---
     const mainNav = document.getElementById('main-nav');
-    const navLinksContainer = mainNav?.querySelector('.nav-links');
-    const mobileMenuToggle = mainNav?.querySelector('.mobile-menu-toggle');
+    // Select desktop and mobile link containers (now both inside #main-nav)
+    const desktopNavLinksContainer = mainNav?.querySelector('.nav-links.desktop-links');
+    const mobileNavLinksContainer = mainNav?.querySelector('.nav-links.mobile-links'); // Target mobile links inside nav
+    const mobileMenuToggle = mainNav?.querySelector('.mobile-menu-toggle'); // Toggle remains in mainNav
     const directoryGridContainer = document.getElementById('directory-grid-container');
     const directoryFilterButtonsContainer = document.querySelector('.directory-filters');
     const forSaleGridContainer = document.getElementById('forsale-grid-container');
@@ -107,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let touchEndX = 0;
 
     // --- Navigation Logic ---
-    // Smooth scrolling for internal links
-    navLinksContainer?.querySelectorAll('a[href^="#"]').forEach(link => {
+    // Smooth scrolling for internal links (Apply to BOTH menus)
+    document.querySelectorAll('#main-nav .nav-links a[href^="#"]').forEach(link => { // Select links inside #main-nav
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
@@ -117,14 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const navHeight = mainNav?.offsetHeight ?? 0;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                // Close mobile menu if open
-                if (navLinksContainer.classList.contains('active')) {
-                    navLinksContainer.classList.remove('active');
+
+                // Close mobile menu if open and if the clicked link was inside the mobile menu
+                if (mobileNavLinksContainer && mobileNavLinksContainer.classList.contains('active') && this.closest('.nav-links.mobile-links')) {
+                    mobileNavLinksContainer.classList.remove('active');
                     mobileMenuToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-bars');
                 }
             }
         });
     });
+
 
     // Add 'scrolled' class to nav on scroll
     window.addEventListener('scroll', () => {
@@ -132,9 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         updateActiveNavLink();
     });
 
-    // Update active nav link based on scroll position
+    // Update active nav link based on scroll position (Update BOTH menus)
     function updateActiveNavLink() {
-        if (!navLinksContainer) return;
         let currentSectionId = '';
         const sections = document.querySelectorAll('main section[id]');
         const navHeightOffset = (mainNav?.offsetHeight ?? 0) + 10;
@@ -158,20 +161,20 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSectionId = 'home'; // Default to home if above the first section
         }
 
-        // Update active class on nav links
-        navLinksContainer.querySelectorAll('a').forEach(link => {
+        // Update active class on nav links in BOTH containers within #main-nav
+        mainNav?.querySelectorAll('.nav-links a').forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === `#${currentSectionId}`);
         });
     }
 
-    // Mobile menu toggle
-    if (mobileMenuToggle && navLinksContainer) {
+    // Mobile menu toggle (Target the correct mobile container inside #main-nav)
+    if (mobileMenuToggle && mobileNavLinksContainer) {
         mobileMenuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
+            mobileNavLinksContainer.classList.toggle('active'); // Toggle active on the mobile container
             const icon = mobileMenuToggle.querySelector('i');
             if (icon) {
-                icon.classList.toggle('fa-bars', !navLinksContainer.classList.contains('active'));
-                icon.classList.toggle('fa-times', navLinksContainer.classList.contains('active'));
+                icon.classList.toggle('fa-bars', !mobileNavLinksContainer.classList.contains('active'));
+                icon.classList.toggle('fa-times', mobileNavLinksContainer.classList.contains('active'));
             }
         });
     }

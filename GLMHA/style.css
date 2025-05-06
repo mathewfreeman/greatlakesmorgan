@@ -1,4 +1,4 @@
-/* style.css - Enhanced Design with Final Polish v6 - Full VH Hero */
+/* style.css - Enhanced Design with Final Polish v17 - Revert Mobile Menu Structure */
 
 /* --- Base Styles & Variables --- */
 :root {
@@ -15,7 +15,8 @@
     --slideshow-bg: #f0f0f0;   /* Subtle background for image container */
 
     /* Typography */
-    --font-primary: 'Lato', sans-serif;
+    /* Using IBM Plex Sans from the HTML */
+    --font-primary: 'IBM Plex Sans', sans-serif;
 
     /* Layout & Effects */
     --section-padding: 80px 0;
@@ -23,7 +24,7 @@
     --border-radius: 6px; /* Slightly more rounded */
     --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
     --box-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
-    --transition-speed: 0.3s;
+    --transition-speed: 0.3s; /* Keep transition speed */
     --sale-tile-min-width: 300px; /* Define min width for sale tiles */
     --nav-height: 70px; /* Define nav height for calculations */
     --nav-height-scrolled: 60px;
@@ -46,8 +47,6 @@ body {
     line-height: 1.7; /* Improved readability */
     color: var(--dark-text);
     background-color: var(--white); /* Keep default white */
-    /* UPDATE: Removed padding-top from body */
-    /* padding-top: var(--nav-height); */
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
@@ -60,7 +59,7 @@ body {
 
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+    font-weight: 700; /* Using default bold from HTML */
     color: var(--primary-blue);
     line-height: 1.3;
     margin-bottom: 0.75em;
@@ -71,7 +70,7 @@ h2 { font-size: 2.5rem; }
 h3 { font-size: 1.75rem; }
 p { margin-bottom: 1.25rem; color: var(--medium-text); }
 a { color: var(--secondary-teal); text-decoration: none; transition: color var(--transition-speed) ease; }
-a:hover { color: var(--primary-blue); /* text-decoration: underline; */ }
+a:hover { color: var(--primary-blue); }
 ul { list-style: none; padding-left: 0; margin-bottom: 1rem; }
 li { margin-bottom: 0.5rem; }
 
@@ -81,17 +80,17 @@ li { margin-bottom: 0.5rem; }
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 95, 115, 0.95);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 95, 115, 0.95); /* Initial slightly transparent */
+    backdrop-filter: blur(5px); /* Keep blur for desktop */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 1000; /* High z-index for main nav */
     height: var(--nav-height);
     transition: height var(--transition-speed) ease, background-color var(--transition-speed) ease;
 }
 
 #main-nav.scrolled {
     height: var(--nav-height-scrolled);
-    background-color: rgba(0, 95, 115, 1);
+    background-color: rgba(0, 95, 115, 1); /* Fully opaque when scrolled */
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -103,6 +102,7 @@ li { margin-bottom: 0.5rem; }
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 20px;
+    position: relative; /* Needed for absolute positioning of mobile menu */
 }
 
 #main-nav .logo a {
@@ -112,54 +112,68 @@ li { margin-bottom: 0.5rem; }
     font-weight: bold;
 }
 
+/* Base styles for both desktop and mobile link containers */
 #main-nav .nav-links {
     list-style: none;
-    display: flex;
-    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-#main-nav .nav-links li {
+/* Desktop Navigation Links */
+#main-nav .nav-links.desktop-links {
+    display: flex; /* Display flex by default */
+    height: 100%;
+    margin-bottom: 0;
+}
+
+#main-nav .nav-links.desktop-links li {
     margin-left: 30px;
     margin-bottom: 0;
     display: flex;
-    align-items: center; /* Vertically center content within li */
+    align-items: center;
 }
 
-#main-nav .nav-links a {
+#main-nav .nav-links.desktop-links a {
     color: var(--white);
     text-decoration: none;
     font-size: 1em;
-    /* Use padding for spacing, line-height for centering */
-    padding: 5px 0; /* Add some vertical padding */
-    line-height: 1.2; /* Adjust line-height slightly if needed */
+    padding: 5px 0;
     position: relative;
     transition: color var(--transition-speed) ease;
     display: inline-block;
+    text-transform: uppercase;
+    font-weight: 700;
 }
-#main-nav .nav-links a::after {
+#main-nav .nav-links.desktop-links a::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    /* Adjust bottom position based on padding/line-height */
-    bottom: -5px; /* Fine-tune this value */
-    left: 0;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--accent-light-blue);
     transition: width var(--transition-speed) ease;
 }
-#main-nav .nav-links a:hover,
-#main-nav .nav-links a.active {
+#main-nav .nav-links.desktop-links a:hover,
+#main-nav .nav-links.desktop-links a.active {
     color: var(--accent-light-blue);
     text-decoration: none;
 }
-#main-nav .nav-links a:hover::after,
-#main-nav .nav-links a.active::after {
+#main-nav .nav-links.desktop-links a:hover::after,
+#main-nav .nav-links.desktop-links a.active::after {
     width: 100%;
 }
 
+/* Mobile Navigation Links (Initially hidden, positioned absolutely) */
+#main-nav .nav-links.mobile-links {
+    display: none; /* Hidden by default, shown via media query */
+}
+
+
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
-    display: none;
+    display: none; /* Hidden by default, shown via media query */
     background: none;
     border: none;
     color: var(--white);
@@ -167,6 +181,8 @@ li { margin-bottom: 0.5rem; }
     cursor: pointer;
     padding: 5px;
     line-height: 1;
+    z-index: 1002; /* Ensure toggle button is above dropdown */
+    position: relative; /* Needed for z-index */
 }
 
 /* --- Sections --- */
@@ -200,7 +216,6 @@ li { margin-bottom: 0.5rem; }
 /* --- Hero Section --- */
 .hero-section {
     position: relative;
-    /* UPDATE: Changed height to 100vh */
     height: 100vh;
     min-height: 500px; /* Keep a min-height */
     display: flex;
@@ -212,7 +227,7 @@ li { margin-bottom: 0.5rem; }
     background-color: var(--primary-blue); /* Fallback */
 }
 .parallax-bg {
-    background-image: url('s/hero.webp'); /* Ensure this path is correct */
+    background-image: url('hero.webp'); /* Correct path relative to CSS */
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -230,9 +245,7 @@ li { margin-bottom: 0.5rem; }
 .hero-content {
     position: relative;
     z-index: 2;
-    /* UPDATE: Add padding-top to account for fixed nav */
     padding-top: var(--nav-height);
-    /* Ensure container doesn't exceed width */
     width: 100%;
     max-width: var(--container-max-width);
     padding-left: 20px;
@@ -243,7 +256,7 @@ li { margin-bottom: 0.5rem; }
     font-size: clamp(2.5rem, 6vw, 4rem);
     margin-bottom: 20px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    line-height: 1.2; /* Adjust line height for multi-line h1 */
+    line-height: 1.2;
 }
 .hero-content p {
     font-size: clamp(1.1rem, 3vw, 1.4rem);
@@ -252,14 +265,14 @@ li { margin-bottom: 0.5rem; }
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center; /* Override justify for hero */
+    text-align: center;
 }
 
 /* --- Buttons --- */
 .btn {
-    display: inline-flex; /* Use inline-flex for alignment */
+    display: inline-flex;
     align-items: center;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center;
     gap: 8px;
     padding: 12px 25px;
     border: 2px solid transparent;
@@ -271,14 +284,13 @@ li { margin-bottom: 0.5rem; }
     transition: all var(--transition-speed) ease;
     margin: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: auto; /* Default to auto width */
-    white-space: nowrap; /* Prevent text wrapping */
+    width: auto;
+    white-space: nowrap;
 }
 .btn i {
     font-size: 1.1em;
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    flex-shrink: 0;
 }
-/* Add transition for spinner */
 .btn .fa-spinner {
     transition: transform 1s linear infinite;
 }
@@ -297,14 +309,13 @@ li { margin-bottom: 0.5rem; }
     transform: translateY(-3px);
     box-shadow: var(--box-shadow-hover);
 }
-/* Style for disabled button state */
 .btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-    transform: none; /* Prevent hover effect */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Reset shadow */
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.btn-primary:disabled:hover { /* Prevent hover color change when disabled */
+.btn-primary:disabled:hover {
     background-color: var(--secondary-teal);
     border-color: var(--secondary-teal);
     color: var(--white);
@@ -321,7 +332,6 @@ li { margin-bottom: 0.5rem; }
     transform: translateY(-3px);
     box-shadow: var(--box-shadow-hover);
 }
-/* Hero button specifics */
 .hero-section .btn {
     padding: 15px 30px;
     font-size: 1.1em;
@@ -423,7 +433,7 @@ li { margin-bottom: 0.5rem; }
 }
 
 .directory-tile .btn {
-    width: 100%; /* Keep details button full width */
+    width: 100%;
     margin-top: auto;
 }
 
@@ -452,9 +462,9 @@ li { margin-bottom: 0.5rem; }
     text-align: center;
     flex-shrink: 0;
 }
-/* Add margin to strong tag for spacing */
 .event-item p strong {
-    margin-right: 0.5em; /* Adjust space as needed */
+    margin-right: 0.5em;
+    color: var(--dark-text);
 }
 
 
@@ -532,22 +542,21 @@ li { margin-bottom: 0.5rem; }
      color: var(--secondary-teal);
 }
 .forsale-tile .btn {
-    width: 100%; /* Keep details button full width */
+    width: 100%;
     margin-top: auto;
 }
 
 
 /* --- Contact Section Flair --- */
 .contact-flair {
-    background-color: var(--white); /* Ensure white background */
+    background-color: var(--white);
 }
-/* NEW: Style for directory update prompt */
 .directory-update-prompt {
     text-align: center;
     font-style: italic;
     color: var(--medium-text);
-    margin-bottom: 40px; /* Space below prompt */
-    margin-top: -20px; /* Adjust space above prompt */
+    margin-bottom: 40px;
+    margin-top: -20px;
     font-size: 1.1em;
 }
 
@@ -575,9 +584,8 @@ li { margin-bottom: 0.5rem; }
     text-align: center;
     flex-shrink: 0;
 }
-/* UPDATE: Add margin to email link */
 .contact-details p:has(i.fa-envelope) a {
-    margin-left: 0.5em; /* Add space after "Email:" */
+    margin-left: 0.5em;
 }
 
 .social-links {
@@ -631,22 +639,19 @@ li { margin-bottom: 0.5rem; }
     border-color: var(--secondary-teal);
     box-shadow: 0 0 0 2px rgba(10, 147, 150, 0.2);
 }
-/* Subscribe button */
 .email-signup-form button[type="submit"] {
-    width: auto; /* Allow button to size based on content */
-    min-width: 270px; /* Ensure enough space for "Thanks for Subscribing!" */
-    padding: 12px 25px; /* Adjust padding as needed */
-    text-align: center; /* Ensure text is centered */
+    width: auto;
+    min-width: 270px;
+    padding: 12px 25px;
+    text-align: center;
 }
 .signup-status {
     margin-top: 15px;
     font-size: 0.9em;
-    min-height: 1.5em; /* Reserve space for error messages */
-    color: red; /* Default color for errors */
+    min-height: 1.5em;
+    color: red;
 }
-/* Remove success class styling as success is shown on button */
-/* .signup-status.success { color: green; } */
-.signup-status.error { /* Explicitly style errors */
+.signup-status.error {
     color: red;
 }
 
@@ -702,13 +707,14 @@ li { margin-bottom: 0.5rem; }
 
 #modal-body h2 {
     color: var(--primary-blue);
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: left;
     font-size: 2.2rem;
     padding-bottom: 0;
     border-bottom: none;
 }
-#modal-body .modal-barn-name { /* Horse barn name */
+#modal-body .modal-barn-name {
     font-size: 1.4rem;
     font-style: italic;
     color: var(--medium-text);
@@ -717,7 +723,6 @@ li { margin-bottom: 0.5rem; }
     border-bottom: 2px solid var(--light-grey);
     padding-bottom: 15px;
 }
-/* Event Modal Title */
 #modal-body .event-modal-title {
     display: flex;
     align-items: center;
@@ -727,11 +732,11 @@ li { margin-bottom: 0.5rem; }
     margin-bottom: 25px;
 }
 #modal-body .event-modal-title i {
-    font-size: 2.5rem; /* Larger icon */
+    font-size: 2.5rem;
     color: var(--secondary-teal);
 }
 #modal-body .event-modal-title h2 {
-    margin-bottom: 0; /* Remove default margin */
+    margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
 }
@@ -766,7 +771,7 @@ li { margin-bottom: 0.5rem; }
 #modal-body a:hover {
     color: var(--primary-blue);
 }
-.modal-detail-section { /* For Horse Sales */
+.modal-detail-section {
     margin-top: 25px;
     padding-top: 20px;
     border-top: 1px solid var(--light-grey);
@@ -788,7 +793,8 @@ li { margin-bottom: 0.5rem; }
 .modal-detail-section p {
     margin-bottom: 10px;
     line-height: 1.7;
-    display: block; /* Reset flex for paragraph text */
+    display: block;
+    padding-left: 0;
 }
 
 /* Event Modal Specific Styles */
@@ -796,15 +802,15 @@ li { margin-bottom: 0.5rem; }
     margin-bottom: 25px;
 }
 .event-modal-details p {
-    font-size: 1.05em; /* Slightly larger text */
+    font-size: 1.05em;
 }
-/* Add margin to strong tag for spacing in event modal */
 .event-modal-details p strong {
-    margin-right: 0.5em; /* Adjust space as needed */
+    margin-right: 0.5em;
+    color: var(--dark-text);
 }
-.event-modal-details .event-description { /* Specific styling for description para */
-    display: block; /* Override flex for description */
-    margin-top: 1em; /* Space above description */
+.event-modal-details .event-description {
+    display: block;
+    margin-top: 1em;
 }
 
 .event-links {
@@ -813,14 +819,13 @@ li { margin-bottom: 0.5rem; }
     border-top: 1px solid var(--light-grey);
     display: flex;
     gap: 15px;
-    flex-wrap: wrap; /* Allow buttons to wrap */
+    flex-wrap: wrap;
 }
 .event-links .btn {
-    /* Use secondary style for links */
     background-color: transparent;
     color: var(--secondary-teal);
     border: 2px solid var(--secondary-teal);
-    width: auto; /* Ensure buttons fit content */
+    width: auto;
 }
 .event-links .btn:hover {
     background-color: var(--secondary-teal);
@@ -834,7 +839,7 @@ li { margin-bottom: 0.5rem; }
     padding-top: 20px;
     border-top: 1px solid var(--light-grey);
 }
-.modal-contact-info h4 { /* Optional heading */
+.modal-contact-info h4 {
     font-size: 1.2em;
     color: var(--primary-blue);
     margin-bottom: 15px;
@@ -855,21 +860,21 @@ li { margin-bottom: 0.5rem; }
 .modal-main-image-container {
     position: relative;
     margin-bottom: 15px;
-    background-color: var(--slideshow-bg); /* Background for letterboxing */
+    background-color: var(--slideshow-bg);
     border-radius: var(--border-radius);
     overflow: hidden;
-    aspect-ratio: 16 / 9; /* Modern way */
-    display: flex; /* Center image within container */
+    aspect-ratio: 16 / 9;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 .modal-main-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Fit image proportionally */
+    object-fit: contain;
     display: block;
-    border-radius: 0; /* Remove radius if container has it */
-    box-shadow: none; /* Remove shadow if container has it */
+    border-radius: 0;
+    box-shadow: none;
     -webkit-user-drag: none;
     user-select: none;
 }
@@ -911,7 +916,7 @@ li { margin-bottom: 0.5rem; }
     border-radius: calc(var(--border-radius) / 2);
     cursor: pointer;
     border: 3px solid transparent;
-    transition: border-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    transition: border-color var(--transition-speed) ease, transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
     opacity: 0.7;
 }
 .modal-thumbnail:hover {
@@ -933,17 +938,23 @@ li { margin-bottom: 0.5rem; }
 
 /* --- Footer --- */
 footer {
-    /* Updated background and text color */
     background-color: var(--primary-blue);
     text-align: center;
     padding: 30px 0;
-    margin-top: 60px; /* This might need adjustment if hero overlaps */
+    margin-top: 60px;
     font-size: 0.9em;
 }
-/* Target the paragraph specifically for the color */
 footer p {
     color: var(--white);
-    margin-bottom: 0; /* Remove default paragraph margin */
+    margin-bottom: 0; /* Remove default margin for copyright */
+    line-height: 1.5; /* Adjust line height if needed */
+}
+/* Style for the new footer line */
+footer p.footer-design-credit {
+    /* Reduce space above the new line */
+    margin-top: 4px; /* Smaller value */
+    font-size: 0.85em; /* Slightly smaller text */
+    opacity: 0.8; /* Slightly faded */
 }
 
 
@@ -956,37 +967,70 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    /* UPDATE: Removed body padding-top for mobile */
-    /* body { padding-top: var(--nav-height-scrolled); } */
-    #main-nav, #main-nav.scrolled { height: var(--nav-height-scrolled); }
-    #main-nav .nav-container { padding: 0 15px; }
-    #main-nav .nav-links {
-        display: none;
-        position: absolute;
-        top: var(--nav-height-scrolled); /* Position below scrolled nav */
-        left: 0;
+    #main-nav, #main-nav.scrolled {
+        height: var(--nav-height-scrolled);
+        /* Remove backdrop-filter on mobile */
+        backdrop-filter: none;
+        /* Ensure main nav background is fully opaque on mobile */
         background-color: var(--primary-blue);
-        width: 100%;
-        flex-direction: column;
-        text-align: center;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-    #main-nav .nav-links.active { display: flex; max-height: 500px; }
-    #main-nav .nav-links li { margin: 0; height: auto; align-items: stretch; }
-    #main-nav .nav-links a { display: block; padding: 18px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--white); width: 100%; }
-    #main-nav .nav-links a::after { display: none; }
-    #main-nav .nav-links a:hover, #main-nav .nav-links a.active { background-color: var(--secondary-teal); color: var(--white); }
+    #main-nav .nav-container { padding: 0 15px; }
+
+    /* Hide desktop links on mobile */
+    #main-nav .nav-links.desktop-links {
+        display: none;
+    }
+
+    /* Style the mobile-only links container (inside #main-nav) */
+    #main-nav .nav-links.mobile-links {
+        display: block; /* Use block display */
+        position: absolute; /* Position relative to #main-nav .nav-container */
+        top: 100%; /* Position directly below the nav bar */
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-teal); /* Solid background */
+        backdrop-filter: none; /* Ensure no blur */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999; /* Below main nav (1000) and toggle (1002) */
+        max-height: 0; /* Start hidden */
+        overflow: hidden; /* Hide content when collapsed */
+        transition: max-height 0.4s ease-out; /* Animate max-height */
+    }
+    #main-nav .nav-links.mobile-links.active {
+        max-height: 500px; /* Allow expansion (adjust if needed) */
+        overflow: visible; /* Allow content to be seen */
+    }
+    #main-nav .nav-links.mobile-links li {
+        margin: 0;
+        height: auto;
+        align-items: stretch;
+        width: 100%;
+    }
+    #main-nav .nav-links.mobile-links a {
+        display: block;
+        padding: 18px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        width: 100%;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: center; /* Center text */
+    }
+    #main-nav .nav-links.mobile-links a::after { display: none; } /* No underline needed */
+    #main-nav .nav-links.mobile-links a:hover,
+    #main-nav .nav-links.mobile-links a.active { /* Style active/hover link */
+        background-color: var(--primary-blue);
+        color: var(--white);
+    }
+
+    /* Show mobile toggle button */
     .mobile-menu-toggle { display: block; }
 
     .hero-section {
-        height: 100vh; /* Ensure full height */
-        background-attachment: scroll; /* Parallax doesn't work well on mobile */
+        height: 100vh;
+        background-attachment: scroll;
     }
     .hero-content {
-        /* Adjust padding top for scrolled nav height on mobile */
         padding-top: var(--nav-height-scrolled);
     }
     .hero-content h1 { font-size: 2rem; line-height: 1.3; }
@@ -996,8 +1040,8 @@ footer p {
     .content-section h2 { font-size: 1.8rem; margin-bottom: 30px; }
 
     #about p {
-        text-align: left; /* Switch from justify to left on smaller screens */
-        font-size: 1.1em; /* Adjust if needed for mobile */
+        text-align: left;
+        font-size: 1.1em;
     }
 
     .directory-grid, .forsale-grid { grid-template-columns: 1fr; }
@@ -1008,18 +1052,16 @@ footer p {
     .contact-details { text-align: center; }
     .contact-details h3 { text-align: center; }
     .contact-details p { justify-content: center; }
-    /* Ensure email link spacing works on mobile */
     .contact-details p:has(i.fa-envelope) a {
-        margin-left: 0.5em; /* Maintain space */
+        margin-left: 0.5em;
     }
-    .contact-form-container { margin-top: 30px; text-align: center; } /* Center form container */
+    .contact-form-container { margin-top: 30px; text-align: center; }
     .contact-form-container h3, .contact-form-container p { text-align: center; }
-    .email-signup-form { display: inline-block; text-align: left; max-width: 400px; width: 100%; } /* Center form elements */
-    /* Ensure button centering works on mobile */
+    .email-signup-form { display: inline-block; text-align: left; max-width: 400px; width: 100%; }
     .email-signup-form button[type="submit"] {
-        display: inline-flex; /* Keep inline-flex for alignment */
-        margin: 0 auto; /* Center if needed, but inline-flex might handle it */
-        min-width: 240px; /* Adjust min-width for smaller screens if necessary */
+        display: inline-flex;
+        margin: 0 auto;
+        min-width: 240px;
     }
 
 
@@ -1033,7 +1075,7 @@ footer p {
     .slideshow-arrow.next { right: 5px; }
     .modal-thumbnail { width: 60px; height: 45px; }
     .event-links { flex-direction: column; gap: 10px; align-items: stretch; }
-    .event-links .btn { width: 100%; text-align: center; } /* Ensure button text is centered */
+    .event-links .btn { width: 100%; text-align: center; }
 }
 
 /* Add FontAwesome animation for spinner */
@@ -1044,3 +1086,4 @@ footer p {
 .fa-spin {
   animation: fa-spin 1s infinite linear;
 }
+
