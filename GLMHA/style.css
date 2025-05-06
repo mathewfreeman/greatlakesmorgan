@@ -994,7 +994,7 @@ footer p.footer-design-credit {
         z-index: 999; /* Below main nav (1000) and toggle (1002) */
         max-height: 0; /* Start hidden */
         overflow: hidden; /* Hide content when collapsed */
-        transition: max-height 0.1s ease-out; /* Animate max-height */
+        transition: max-height 0.0s ease-out; /* Animate max-height */
     }
     #main-nav .nav-links.mobile-links.active {
         max-height: 500px; /* Allow expansion (adjust if needed) */
