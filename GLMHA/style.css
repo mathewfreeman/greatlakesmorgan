@@ -227,7 +227,7 @@ li { margin-bottom: 0.5rem; }
     background-color: var(--primary-blue); /* Fallback */
 }
 .parallax-bg {
-    background-image: url('hero.webp'); /* Correct path relative to CSS */
+    background-image: url('s/hero.webp'); /* Correct path relative to CSS */
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -988,7 +988,7 @@ footer p.footer-design-credit {
         top: 100%; /* Position directly below the nav bar */
         left: 0;
         width: 100%;
-        background-color: var(--secondary-teal); /* Solid background */
+        background-color: var(--primary-blue); /* Solid background */
         backdrop-filter: none; /* Ensure no blur */
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         z-index: 999; /* Below main nav (1000) and toggle (1002) */
