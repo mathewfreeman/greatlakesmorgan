@@ -994,7 +994,7 @@ footer p.footer-design-credit {
         z-index: 999; /* Below main nav (1000) and toggle (1002) */
         max-height: 0; /* Start hidden */
         overflow: hidden; /* Hide content when collapsed */
-        transition: max-height 0.4s ease-out; /* Animate max-height */
+        transition: max-height 0.2s ease-out; /* Animate max-height */
     }
     #main-nav .nav-links.mobile-links.active {
         max-height: 500px; /* Allow expansion (adjust if needed) */
@@ -1009,7 +1009,7 @@ footer p.footer-design-credit {
     #main-nav .nav-links.mobile-links a {
         display: block;
         padding: 18px 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 0px solid rgba(255, 255, 255, 0.1);
         color: var(--white);
         width: 100%;
         font-weight: 700;
